@@ -1,6 +1,6 @@
 package com.projetESGI.projet;
 
-import com.projetESGI.projet.Dummy.DummyContent.DummyItem;
+import com.projetESGI.projet.Users.UsersContent.UsersItem;
 import com.projetESGI.projet.ProjectFragment.OnListFragmentInteractionListener;
 
 import android.view.View;
@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
  */
 public class DataRecyclerViewAdapter extends  RecyclerView.Adapter<DataRecyclerViewAdapter.ViewHolder> implements EventListener<QuerySnapshot> {
 
-    private final List<DummyItem> mValues;
+    private final List<UsersItem> mValues;
     private final OnListFragmentInteractionListener mListener;
     private Query query;
     private ListenerRegistration registration;
@@ -58,15 +58,15 @@ public class DataRecyclerViewAdapter extends  RecyclerView.Adapter<DataRecyclerV
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_project_list, parent, false);
+                .inflate(R.layout.fragment_project, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(mValues.get(position).username);
+        holder.mContentView.setText(mValues.get(position).password);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +74,7 @@ public class DataRecyclerViewAdapter extends  RecyclerView.Adapter<DataRecyclerV
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                        mListener.onListFragmentInteraction(holder.mItem);
                 }
             }
         });
@@ -95,7 +95,7 @@ public class DataRecyclerViewAdapter extends  RecyclerView.Adapter<DataRecyclerV
         for (DocumentChange documentChange : queryDocumentSnapshots.getDocumentChanges()) {
             switch (documentChange.getType()) {
                 case ADDED:
-                    mValues.add(documentChange.getNewIndex(), documentChange.getDocument().toObject(DummyItem.class));
+                    mValues.add(documentChange.getNewIndex(), documentChange.getDocument().toObject(UsersItem.class));
                     notifyItemChanged(documentChange.getNewIndex());
                     break;
                 case REMOVED:
@@ -104,11 +104,11 @@ public class DataRecyclerViewAdapter extends  RecyclerView.Adapter<DataRecyclerV
                     break;
                 case MODIFIED:
                     if (documentChange.getNewIndex() == documentChange.getOldIndex()) {
-                        mValues.set(documentChange.getOldIndex(), documentChange.getDocument().toObject(DummyItem.class));
+                        mValues.set(documentChange.getOldIndex(), documentChange.getDocument().toObject(UsersItem.class));
                         notifyItemChanged(documentChange.getOldIndex());
                     } else {
                         mValues.remove(documentChange.getOldIndex());
-                        mValues.add(documentChange.getNewIndex(), documentChange.getDocument().toObject(DummyItem.class));
+                        mValues.add(documentChange.getNewIndex(), documentChange.getDocument().toObject(UsersItem.class));
                         notifyItemMoved(documentChange.getOldIndex(), documentChange.getNewIndex());
                     }
                     break;
@@ -120,13 +120,13 @@ public class DataRecyclerViewAdapter extends  RecyclerView.Adapter<DataRecyclerV
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public UsersItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mIdView = view.findViewById(R.id.item_number);
+            mContentView = view.findViewById(R.id.content);
         }
 
         @Override

@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <application
         android:name=".Application"
         android:allowBackup="true"
@@ -16,32 +17,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< Updated upstream
         <receiver android:name=".ViewerWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/viewer_widget_info" />
         </receiver>
-
-        <activity android:name=".MainActivity">
-=======
         <activity android:name=".MainScreen.MainScreen"></activity>
         <activity android:name=".OnlineFiles.OnlineFilesParser" />
         <activity android:name=".LocalFiles.LocalFilesParser" />
         <activity android:name=".CreateAccount.CreateAccount"/>
         <activity android:name=".Login.LoginScreen">
->>>>>>> Stashed changes
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- android:name="androidx.multidex.MultiDexApplication" -->
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>

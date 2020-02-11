@@ -14,6 +14,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,13 +31,19 @@ import com.projetESGI.projet.R;
 import com.projetESGI.projet.Users.UsersContent.UsersItem;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class CreateAccount extends AppCompatActivity {
+
+    static final int REQUEST_ACCOUNT_PICKER = 1;
+    private GoogleAccountCredential mCredential;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+        mCredential = GoogleAccountCredential.usingOAuth2(this, Arrays.asList(DriveScopes.DRIVE));
+        startActivityForResult(mCredential.newChooseAccountIntent(), REQUEST_ACCOUNT_PICKER);
 
         //Click creation compte
         findViewById(R.id.create).setOnClickListener(new View.OnClickListener() {
@@ -61,7 +71,16 @@ public class CreateAccount extends AppCompatActivity {
                                                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                                 @Override
                                                                                 public void onSuccess(Void aVoid) {
-
+                                                                                    try {
+                                                                                        File fileMetadata = new File();
+                                                                                        fileMetadata.setName(username.getText().toString());
+                                                                                        fileMetadata.setMimeType("application/vnd.google-apps.folder");
+                                                                                        Drive drive = getDriveService(mCredential);
+                                                                                        File file = drive.files().create(fileMetadata)
+                                                                                                .execute();
+                                                                                    } catch (IOException e) {
+                                                                                        e.printStackTrace();
+                                                                                    }
                                                                                 }
                                                                             })
                                                                             .addOnFailureListener(new OnFailureListener() {
@@ -98,6 +117,10 @@ public class CreateAccount extends AppCompatActivity {
     private void goToMainScreeen(View v){
         startActivity(new Intent(this, MainScreen.class));
         finish();
+    }
+
+    private Drive getDriveService(GoogleAccountCredential credential) {
+        return new Drive.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), credential).build();
     }
 
 }

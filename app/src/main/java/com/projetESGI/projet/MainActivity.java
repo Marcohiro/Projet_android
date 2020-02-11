@@ -6,15 +6,6 @@ import com.projetESGI.projet.Users.UsersContent.UsersItem;
 
 import android.os.Bundle;
 import android.widget.Toast;
-/*
-import com.google.android.gms.drive.Drive;
-import com.google.android.gms.drive.DriveClient;
-import com.google.android.gms.drive.DriveContents;
-import com.google.android.gms.drive.DriveResourceClient;
-import com.google.android.gms.drive.MetadataChangeSet;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;*/
 
 public class MainActivity extends AppCompatActivity implements ProjectFragment.OnListFragmentInteractionListener{
 

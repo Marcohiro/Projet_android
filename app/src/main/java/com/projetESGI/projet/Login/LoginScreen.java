@@ -1,26 +1,29 @@
 package com.projetESGI.projet.Login;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.api.services.drive.DriveScopes;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.projetESGI.projet.CreateAccount.CreateAccount;
-import com.projetESGI.projet.MainActivity;
+import com.projetESGI.projet.MainScreen.MainScreen;
 import com.projetESGI.projet.R;
-import com.projetESGI.projet.Users.UsersContent;
+
+import java.util.Collections;
+
+import static java.security.AccessController.getContext;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -66,7 +69,7 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     private void goToMainActivity(View v) {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, MainScreen.class));
         finish();
     }
 

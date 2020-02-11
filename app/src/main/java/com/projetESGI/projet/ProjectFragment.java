@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.projetESGI.projet.Users.UsersContent.UsersItem;
 
@@ -51,18 +51,22 @@ public class ProjectFragment extends Fragment {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             DocumentReference newUsr = db.collection("Users").document();
             UsersItem user = new UsersItem();
-            user.setUsername("test2");
-            user.setPassword("test2");
-            newUsr.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Log.d("TAG", "user pushed");
-                    } else {
-                        Log.d("TAG", "fail");
-                    }
-                }
-            });
+            user.setUsername("test3");
+            user.setPassword("test3");
+            db.collection("Users").document("test3")
+                    .set(user)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("TAG", "DocumentSnapshot successfully written!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("TAG", "Error writing document", e);
+                        }
+                    });
             Query query = db.collection("Users");
             adapter = new DataRecyclerViewAdapter(query, mListener);
             Log.d("TAG", String.format("%d", adapter.getItemCount()));

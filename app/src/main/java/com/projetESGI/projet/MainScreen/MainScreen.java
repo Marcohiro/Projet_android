@@ -30,6 +30,17 @@ public class MainScreen extends AppCompatActivity {
                 switchToLocalFiles(v);
             }
         });
+
+        findViewById(R.id.leave).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //leaveApplication(v);
+            }
+        });
+    }
+
+    private void leaveApplication(View v) {
+        finish();
     }
 
     private void switchToLocalFiles(View v) {

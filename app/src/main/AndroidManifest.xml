@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.projetESGI.projet">
-
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyDPn03NW8jkLfBTa_YKIcpjfOPKXj9n2wE"
+        />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
+        android:name=".Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< Updated upstream
         <receiver android:name=".ViewerWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -20,12 +28,20 @@
         </receiver>
 
         <activity android:name=".MainActivity">
+=======
+        <activity android:name=".MainScreen.MainScreen"></activity>
+        <activity android:name=".OnlineFiles.OnlineFilesParser" />
+        <activity android:name=".LocalFiles.LocalFilesParser" />
+        <activity android:name=".CreateAccount.CreateAccount"/>
+        <activity android:name=".Login.LoginScreen">
+>>>>>>> Stashed changes
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity> <!-- android:name="androidx.multidex.MultiDexApplication" -->
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

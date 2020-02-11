@@ -14,13 +14,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.api.services.drive.model.File;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import com.google.api.services.drive.Drive;
+
 import com.projetESGI.projet.Login.LoginScreen;
-import com.projetESGI.projet.MainActivity;
+import com.projetESGI.projet.MainScreen.MainScreen;
 import com.projetESGI.projet.R;
 import com.projetESGI.projet.Users.UsersContent.UsersItem;
+
+import java.io.IOException;
 
 public class CreateAccount extends AppCompatActivity {
 
@@ -55,7 +61,7 @@ public class CreateAccount extends AppCompatActivity {
                                                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                                 @Override
                                                                                 public void onSuccess(Void aVoid) {
-                                                                                    Log.d("TAG", "DocumentSnapshot successfully written!");
+
                                                                                 }
                                                                             })
                                                                             .addOnFailureListener(new OnFailureListener() {
@@ -86,6 +92,11 @@ public class CreateAccount extends AppCompatActivity {
 
     private void returnToLoginScreen(View v) {
         startActivity(new Intent(this, LoginScreen.class));
+        finish();
+    }
+
+    private void goToMainScreeen(View v){
+        startActivity(new Intent(this, MainScreen.class));
         finish();
     }
 

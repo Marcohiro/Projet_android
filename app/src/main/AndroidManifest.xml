@@ -12,6 +12,10 @@
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyDPn03NW8jkLfBTa_YKIcpjfOPKXj9n2wE"
         />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
 
     <application
         android:name=".Application"
@@ -23,9 +27,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".LocalFiles.LocalFile"></activity>
         <receiver android:name=".ViewerWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
@@ -42,7 +43,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- android:name="androidx.multidex.MultiDexApplication" -->
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>

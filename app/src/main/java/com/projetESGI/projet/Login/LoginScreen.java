@@ -9,10 +9,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.services.drive.DriveScopes;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -21,16 +20,20 @@ import com.projetESGI.projet.CreateAccount.CreateAccount;
 import com.projetESGI.projet.MainScreen.MainScreen;
 import com.projetESGI.projet.R;
 
-import java.util.Collections;
+import java.util.Arrays;
 
-import static java.security.AccessController.getContext;
 
 public class LoginScreen extends AppCompatActivity {
 
+    static final int REQUEST_ACCOUNT_PICKER = 1;
+    private GoogleAccountCredential mCredential;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+        mCredential = GoogleAccountCredential.usingOAuth2(this, Arrays.asList(DriveScopes.DRIVE));
+        startActivityForResult(mCredential.newChooseAccountIntent(), REQUEST_ACCOUNT_PICKER);
 
         findViewById(R.id.creerCompte).setOnClickListener(new View.OnClickListener() {
             @Override

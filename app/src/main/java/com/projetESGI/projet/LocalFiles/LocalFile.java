@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,9 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,15 +21,10 @@ import android.widget.Toast;
 import com.projetESGI.projet.R;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
-public class LocalFilesParser extends AppCompatActivity{
-
-    List<String> listFile=new ArrayList<String>();
+public class LocalFile extends AppCompatActivity {
 
     EditText description, edtPrice;
     Button btnChoose, btnAdd, btnList;
@@ -41,34 +33,24 @@ public class LocalFilesParser extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_local_files_parser);
+        setContentView(R.layout.activity_local_file);
         init();
 
-        btnChoose.setOnClickListener(new View.OnClickListener() {
+              btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Log.d("test", "add");
                 ActivityCompat.requestPermissions(
-                        LocalFilesParser.this,
+                        LocalFile.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         REQUEST_CODE_GALLERY
                 );
             }
         });
-/*
-        File root= new File(Environment.getExternalStorageDirectory().getName());
-        ListDir(root);*/
-    }/*
-    void ListDir (File f){
-        File[] files=f.listFiles();
-        listFile.clear();
-        for (File file:files){
-            listFile.add(file.getName());
-        }
-        ArrayAdapter<String> dir=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
-        setListAdapter(dir);
 
-    }*/
+    }
+
+
 
 
 
